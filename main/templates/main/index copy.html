@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Roulette</title>
+    <script src='Winwheel.js'></script>
+    <style></style>
+</head>
+<body>
+    <canvas id='myCanvas' width='1500' height='700'>
+        Canvas not supported, use another browser.
+    </canvas>   
+
+
+    <script>
+        let theWheel = new Winwheel({
+            'canvasId' : 'myCanvas',
+            'numSegments' : 8,
+            'textOrientation' : 'curved', 
+            'textAlignment' : 'outer',
+            'textFontSize' : 20,                
+            'innerRadius' : 40,
+            'centerX'    : 800,  
+            'centerY'    : 350,     
+            'segments' :
+            [
+                {'fillStyle' : '#eae56f', 'text' : 'Segment 1'},
+                {'fillStyle' : '#89f26e', 'text' : 'Segment 2'},
+                {'fillStyle' : '#7de6ef', 'text' : 'Segment 3'},
+                {'fillStyle' : '#e7106f', 'text' : 'Segment 4'},
+                {'fillStyle' : '#e7206f', 'text' : 'Segment 5'},
+                {'fillStyle' : '#e7306f', 'text' : 'Segment 6'},
+                {'fillStyle' : '#e7406f', 'text' : 'Segment 7'},
+                {'fillStyle' : '#e7506f', 'text' : 'Segment 8'}
+            ],
+            'strokeStyle'  : 'black',
+            'lineWidth' : 3,
+            'animation' :
+            {
+                'type'     : 'spinToStop',  
+                'duration' : 5,             
+                'spins'    : 8,           
+                'easing'       : 'Power4.easeOut',
+                'stopAngle'    : null,
+                'direction'    : 'clockwise',
+                'repeat'       : 0,
+                'yoyo'         : false   
+            }
+        });
+
+        c = theWheel.ctx;
+
+        if (c) {
+            c.save();
+            c.strokeStyle = 'black';     // Set line colour.
+            c.fillStyle   = 'black';        // Set fill colour.
+            c.lineWidth   = 2;
+            c.beginPath();                 // Begin path.
+            c.moveTo(1190, 320);             // Move to initial position.
+            c.lineTo(1190, 380);             // Draw lines to make the shape.
+            c.lineTo(1150, 350);
+            c.lineTo(1190, 320);
+            c.stroke();                    // Complete the path by stroking (draw lines).
+            c.fill();
+            c.restore();                      // Then fill with colour.
+        }
+
+        // function changeColours()
+        // {
+
+        // let temp = theWheel.segments[1].fillStyle;
+        // theWheel.segments[1].fillStyle = theWheel.segments[2].fillStyle;
+        // theWheel.segments[2].fillStyle = theWheel.segments[3].fillStyle;
+        // theWheel.segments[3].fillStyle = theWheel.segments[4].fillStyle;
+        // theWheel.segments[4].fillStyle = theWheel.segments[5].fillStyle;
+        // theWheel.segments[5].fillStyle = theWheel.segments[6].fillStyle;
+        // theWheel.segments[6].fillStyle = theWheel.segments[7].fillStyle;
+        // theWheel.segments[7].fillStyle = theWheel.segments[8].fillStyle;
+        // theWheel.segments[8].fillStyle = temp;
+ 
+        // theWheel.draw();
+        // }
+        // function addSegment()
+        // {
+            
+        //     theWheel.addSegment({
+        //         'text' : "Hello World",
+        //         'fillStyle' : 'green'
+        //     }, 1);
+        //     theWheel.draw();
+        // }
+
+        // function deleteSegment()
+        // {
+        //     theWheel.deleteSegment();
+        //     theWheel.draw();
+        // }
+
+   
+
+    </script>
+
+<br>
+<br>
+
+<br>
+<br>
+<button onClick="theWheel.startAnimation();"><h1>Spin the Wheel</h1></button>
+<!-- <button onClick="addSegment();">Add Segment</button>
+<button onClick="deleteSegment();">Delete Segment</button> -->
+</body>
+</html>
