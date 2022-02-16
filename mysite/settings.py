@@ -102,11 +102,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# ALLOWED_HOSTS = [
-#     ".ap-northeast-2.compute.amazonaws.com"
-    
-# ]
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'x.x.x.x']
+ALLOWED_HOSTS = [
+    ".ap-northeast-2.compute.amazonaws.com"  
+]
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'x.x.x.x']
 
 
 # Internationalization
