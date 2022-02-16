@@ -1,22 +1,30 @@
-<html>
-    <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>HTML5 Canvas Winning Wheel</title>
         <link rel="stylesheet" href="main.css" type="text/css" />
         <script type="text/javascript" src="Winwheel.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
     </head>
+    <style>
+        body{
+            background: rgb(252, 239, 184);
+        }
+    </style>
     <body>
         <div align="center">
+            <br>
             <h1>경품 룰렛 돌리기!</h1>
             <br>
             <br />
-            <table cellpadding="0" cellspacing="0" border="0">
+            <table width="400" height="580" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                     <td>
                         <div class="power_controls">
-                            <br />
-                            <br />
-                            <table class="power" cellpadding="10" cellspacing="0">
+
+                            <!-- <table class="power" cellpadding="10" cellspacing="0">
                                 <tr>
                                     <th align="center">Power</th>
                                 </tr>
@@ -29,156 +37,127 @@
                                 <tr>
                                     <td align="center" id="pw1" onClick="powerSelected(1);">Low</td>
                                 </tr>
-                            </table>
+                            </table> -->
                             <br />
-                            <img id="spin_button" src="spin_off.png" alt="Spin" onClick="startSpin();" />
-                            <br /><br />
-                            &nbsp;&nbsp;<a href="#" onClick="resetWheel(); return false;">다시 돌리기</a><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <!-- <img id="spin_button" src="spin_off.png" alt="Spin" onClick="startSpin();" /> -->
+                            
                         </div>
                     </td>
-                    <td width="440" height="580" class="the_wheel" align="center" valign="center">
-                        <canvas id="canvas" width="434" height="434">
+                    <tr>
+                    <td class="the_wheel" align="center" valign="middle">
+                        <canvas id="canvas" width="438" height="434" >
                             <p style="color: white" align="center">Sorry, your browser doesn't support canvas. Please try another.</p>
                         </canvas>
+                        
+                    </td>
+                    </tr>
+                </tr>
+            </table>
+                <td>
+                    
+                </td>
+            <table border="1">
+                <tr>
+                    <br>
+                    <br>
+                    <br>
+          
+                    <td>
+                        
+                        <img id="spin_button" src="spin_on.png" alt="Spin" onClick="startSpin();" />
+                          
+                            
+
+      
                     </td>
                 </tr>
+
             </table>
         </div>
         <script>
-            // Create new wheel object specifying the parameters at creation time.
+            let uri = "my test.asp?name=ståle&car=saab";
+            let encoded = encodeURI(uri);
+            let decoded = decodeURI(encoded);
+
             let theWheel = new Winwheel({
-                'numSegments'  : 8,     // Specify number of segments.
-                'outerRadius'  : 212,   // Set outer radius so wheel fits inside the background.
-                'textFontSize' : 28,    // Set font size as desired.
-                'segments'     :        // Define segments including colour and text.
+                'numSegments'  : 3,     
+                'outerRadius'  : 212,   
+                'textFontSize' : 20,    
+                'segments'     :        
                 [
-                   {'fillStyle' : '#00D8FF', 'text' : 'Prize 1', 'num':1},
-                   {'fillStyle' : '#F2CB61', 'text' : '꽝', 'num':2},
-                   {'fillStyle' : '#FAECC5', 'text' : 'Prize 3', 'num':3},
-                   {'fillStyle' : '#665C00', 'text' : '꽝', 'num':4},
-                   {'fillStyle' : '#476600', 'text' : 'Prize 5', 'num':5},
-                   {'fillStyle' : '#2F9D27', 'text' : '꽝', 'num':6},
-                   {'fillStyle' : '#D4F4FA', 'text' : 'Prize 7', 'num':7},
-                   {'fillStyle' : '#6B66FF', 'text' : '꽝', 'num':8}
+                   {'fillStyle' : '#00D8FF', 'text' : 'AA NFT #001', 'num':1, 'count': 1},
+                   {'fillStyle' : '#F2CB61', 'text' : 'AA NFT #002', 'num':2, 'count': 1},
+                   {'fillStyle' : '#FAECC5', 'text' : '에어드랍', 'num':3, 'count': 9999999},
+
                 ],
-                'animation' :           // Specify the animation to use.
+                'animation' :          
                 {
                     'type'     : 'spinToStop',
-                    'duration' : 5,     // Duration in seconds.
-                    'spins'    : 8,     // Number of complete spins.
+                    'duration' : 5,     
+                    'spins'    : 8,     
                     'callbackFinished' : alertPrize
                 }
             });
-            
-        
-            // Vars used by the code in this page to do power controls.
-            let wheelPower    = 0;
+          
             let wheelSpinning = false;
-
-            // -------------------------------------------------------
-            // Function to handle the onClick on the power buttons.
-            // -------------------------------------------------------
-            function powerSelected(powerLevel)
-            {
-                // Ensure that power can't be changed while wheel is spinning.
-                if (wheelSpinning == false) {
-                    // Reset all to grey incase this is not the first time the user has selected the power.
-                    document.getElementById('pw1').className = "";
-                    document.getElementById('pw2').className = "";
-                    document.getElementById('pw3').className = "";
-
-                    // Now light up all cells below-and-including the one selected by changing the class.
-                    if (powerLevel >= 1) {
-                        document.getElementById('pw1').className = "pw1";
-                    }
-
-                    if (powerLevel >= 2) {
-                        document.getElementById('pw2').className = "pw2";
-                    }
-
-                    if (powerLevel >= 3) {
-                        document.getElementById('pw3').className = "pw3";
-                    }
-
-                    // Set wheelPower var used when spin button is clicked.
-                    wheelPower = powerLevel;
-
-                    // Light up the spin button by changing it's source image and adding a clickable class to it.
-                    document.getElementById('spin_button').src = "spin_on.png";
-                    document.getElementById('spin_button').className = "clickable";
-                }
-            }
-
             function startSpin()
             {
                 if (wheelSpinning == false) {
 
-                    if (wheelPower == 1) {
-                        theWheel.animation.spins = 3;
-                    } else if (wheelPower == 2) {
-                        theWheel.animation.spins = 8;
-                    } else if (wheelPower == 3) {
-                        theWheel.animation.spins = 15;
-                    }
+                    theWheel.animation.spins = 13;
 
-                    // Disable the spin button so can't click again while wheel is spinning.
                     document.getElementById('spin_button').src       = "spin_off.png";
                     document.getElementById('spin_button').className = "";
+                    
+                    let stopAt = 0
+                    let max = Math.random()*100;
+                    if (max < 2)
+                    {
+                        stopAt = Math.floor((Math.random() * 119))
+                    }
+                    else if (max >=2 && max <5)
+                    {
+                        stopAt = (121 + Math.floor((Math.random() * 118)))
+                    }
+                    else if (max >= 5 && max <= 100)
+                    {
+                        stopAt = 241 + Math.floor((Math.random() * 118))
+                    }
+                      
+                    theWheel.animation.stopAngle = stopAt;
 
-                    // Begin the spin animation by calling startAnimation on the wheel object.
                     theWheel.startAnimation();
 
-                    // Set to true so that power can't be changed and spin button re-enabled during
-                    // the current animation. The user will have to reset before spinning again.
                     wheelSpinning = true;
                 }
             }
-            c = theWheel.ctx;
-
-            if (c) {
-                c.save();
-                c.strokeStyle = 'black';   
-                c.fillStyle   = 'black';   
-                c.lineWidth   = 2;
-                c.beginPath();             
-                c.moveTo(217, -10);          
-                c.lineTo(202, -10);
-                c.lineTo(217, 10);   
-                c.lineTo(232, -10);
-                c.lineTo(217, -10);          
-
-                c.stroke();                
-                c.fill();                  
-            }
-            
-            
             
             function resetWheel()
             {
-                theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
-                theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
-                theWheel.draw();                // Call draw to render changes to the wheel.
+                theWheel.stopAnimation(false);  
+                theWheel.rotationAngle = 0;     
+                theWheel.draw();                
 
-                document.getElementById('pw1').className = "";  // Remove all colours from the power level indicators.
-                document.getElementById('pw2').className = "";
-                document.getElementById('pw3').className = "";
+                document.getElementById('spin_button').src = "spin_on.png";
+                document.getElementById('spin_button').className = "clickable";
 
-                wheelSpinning = false;          // Reset to false to power buttons and spin can be clicked again.
+                wheelSpinning = false;  
+                      
             }
 
             function alertPrize(indicatedSegment)
             {
 
-                    if (indicatedSegment.num == 2 || indicatedSegment.num == 4 || indicatedSegment.num == 6 ||indicatedSegment.num == 8){
-                        alert("안타깝습니다 " + indicatedSegment.text);                        
+                    if (indicatedSegment.num == 4 || indicatedSegment.num == 8){
+                        alert("안타깝습니다 " + indicatedSegment.text + "입니다.");                        
                     }
                     else{
-                        alert("축하드립니다 " + indicatedSegment.text);
+                        alert("축하드립니다! " + indicatedSegment.text + "에 당첨되셨습니다.");
+                        indicatedSegment.count -=1;
+                        alert("남은 수량 : " + indicatedSegment.count);
                     }
-                   
-                
-
             }
         </script>
+
     </body>
 </html>
