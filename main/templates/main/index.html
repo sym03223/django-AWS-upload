@@ -1,12 +1,17 @@
+
 <html lang="en">
+
 <head>
+
+    {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>HTML5 Canvas Winning Wheel</title>
-        <link rel="stylesheet" href="main.css" type="text/css" />
-        <script type="text/javascript" src="Winwheel.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+        <title>룰렛 돌리기</title>
+        <link href='{% static "/css/main.css" %}' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" src="{% static '/static/css/main.css' %}">
+        <script type="text/javascript" src="/static/javascript/Winwheel.js"></script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
     </head>
     <style>
         body{
@@ -24,22 +29,9 @@
                     <td>
                         <div class="power_controls">
 
-                            <!-- <table class="power" cellpadding="10" cellspacing="0">
-                                <tr>
-                                    <th align="center">Power</th>
-                                </tr>
-                                <tr>
-                                    <td width="78" align="center" id="pw3" onClick="powerSelected(3);">High</td>
-                                </tr>
-                                <tr>
-                                    <td align="center" id="pw2" onClick="powerSelected(2);">Med</td>
-                                </tr>
-                                <tr>
-                                    <td align="center" id="pw1" onClick="powerSelected(1);">Low</td>
-                                </tr>
-                            </table> -->
+
                             <br />
-                            <!-- <img id="spin_button" src="spin_off.png" alt="Spin" onClick="startSpin();" /> -->
+
                             
                         </div>
                     </td>
@@ -64,7 +56,7 @@
           
                     <td>
                         
-                        <img id="spin_button" src="spin_on.png" alt="Spin" onClick="startSpin();" />
+                        <img id="spin_button" src="/static/images/spin_on.png" alt="Spin" onClick="startSpin();" />
                           
                             
 
@@ -106,7 +98,7 @@
 
                     theWheel.animation.spins = 13;
 
-                    document.getElementById('spin_button').src       = "spin_off.png";
+                    document.getElementById('spin_button').src       = "/static/images/spin_off.png";
                     document.getElementById('spin_button').className = "";
                     
                     let stopAt = 0
@@ -138,7 +130,7 @@
                 theWheel.rotationAngle = 0;     
                 theWheel.draw();                
 
-                document.getElementById('spin_button').src = "spin_on.png";
+                document.getElementById('spin_button').src = "/static/images/spin_on.png";
                 document.getElementById('spin_button').className = "clickable";
 
                 wheelSpinning = false;  
