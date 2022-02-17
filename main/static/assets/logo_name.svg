@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="163" height="54" viewBox="0 0 163 54">
+  <defs>
+    <filter id="EVE_I" x="0" y="0" width="80" height="54" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feFlood flood-opacity="0.502"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="NVENTORY" x="69" y="12" width="94" height="39" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2.5" result="blur-2"/>
+      <feFlood flood-opacity="0.502"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="그룹_4965" data-name="그룹 4965" transform="translate(-5759.5 -3414.5)">
+    <g transform="matrix(1, 0, 0, 1, 5759.5, 3414.5)" filter="url(#EVE_I)">
+      <text id="EVE_I-2" data-name="EVE I" transform="translate(7.5 38.5)" font-size="33" font-family="BebasKai, Bebas Kai" letter-spacing="0.09em"><tspan x="0" y="0">EVE I</tspan></text>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 5759.5, 3414.5)" filter="url(#NVENTORY)">
+      <text id="NVENTORY-2" data-name="NVENTORY" transform="translate(76.5 38.5)" font-size="20" font-family="BebasKai, Bebas Kai" letter-spacing="0.09em" opacity="0.5"><tspan x="0" y="0">NVENTORY</tspan></text>
+    </g>
+  </g>
+</svg>

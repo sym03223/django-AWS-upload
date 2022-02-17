@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="193" height="100" viewBox="0 0 193 100">
+    <defs>
+        <filter id="a" x="0" y="0" width="193" height="100" filterUnits="userSpaceOnUse">
+            <feOffset/>
+            <feGaussianBlur stdDeviation="2.5" result="blur"/>
+            <feFlood flood-opacity=".161"/>
+            <feComposite operator="in" in2="blur"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g style="filter:url(#a)">
+        <text data-name="LOG IN" transform="translate(96.5 74.5)" style="fill:#c59c73;font-size:70px;font-family:BebasKai,Bebas Kai;letter-spacing:.09em"><tspan x="-88.305" y="0">LOG IN</tspan></text>
+    </g>
+</svg>

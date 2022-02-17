@@ -1,3 +1,6 @@
+let nft_1_count = 1;
+let nft_2_count = 1;
+let nft_airdrop = 999999;
 
 function Winwheel(options, drawWheel)
 {

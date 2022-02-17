@@ -1,155 +1,182 @@
-
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+	
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<script type="text/javascript"></script>
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>EVE-I | My NFT</title>
+	
+	<!-- <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+	
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" /> -->
+	{% load static %}
+	<link href="{% static '/css/styles.css' %}" rel="stylesheet" />
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<script type="text/javascript" th:if="${not #strings.isEmpty(userName)}" th:inline="javascript">
+		location.href = "/ft/mypage.do";
+	</script> -->
+</head>
 
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>룰렛 돌리기</title>
-        <link href='{% static "/css/main.css" %}' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" type="text/css" src="{% static '/static/css/main.css' %}">
-        <script type="text/javascript" src="/static/javascript/Winwheel.js"></script>
-        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
-    </head>
-    <style>
-        body{
-            background: rgb(252, 239, 184);
-        }
-    </style>
-    <body>
-        <div align="center">
-            <br>
-            <h1>경품 룰렛 돌리기!</h1>
-            <br>
-            <br />
-            <table width="400" height="580" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                    <td>
-                        <div class="power_controls">
+<body>
+	<!-- Navigation -->
+	<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container px-4 px-lg-5">
+			<a class="navbar-brand" href="/ft/mypage.do">
+				<img class="logo-icon" src="/assets/logo_icon.svg" />
+				<span class="logo-name-part1">EVE I</span><span class="logo-name-part2">Inventory</span>
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-0">
+					<li th:if="${not #strings.isEmpty(userName)}" class="nav-item pt-1"><a class="nav-link fs-4 bebaskai" href="/ft/mypage.do">My Page</a></li>
+				</ul>
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-lg-4">
+					<li th:if="${#strings.isEmpty(userName)}" class="nav-item pt-1"><a class="nav-link active fs-4 bebaskai" aria-current="page" href="/ft/login.do">Login</a></li>
+					<li th:if="${not #strings.isEmpty(userName)}" class="nav-item pt-1 me-2"><a class="nav-link active fs-4 bebaskai" aria-current="page" href="/logout">Logout</a></li>
+					<li th:if="${not #strings.isEmpty(userName)}" class="dropdown">
+						<a class="dropdown-toggle profile-box" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+							<span th:if="${not #strings.isEmpty(userName)}" class="profile-name" th:text="${userName} + ' 님'"></span>
+							<img th:if="${#strings.isEmpty(userImg)}" class="profile-img" src="/assets/default_profile.png" />
+							<img th:if="${not #strings.isEmpty(userImg)}" class="profile-img" th:src="${userImg}" />
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><span class="dropdown-item" th:text="'접속한 계정 : ' + ${userEmail}"></span></li>
+                        </ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav> -->
+	<!-- //Navigation -->
+	<!-- Banner -->
+	<!-- <header class="bg-transparent text-center">
+		<a href="#"><img class="banner" src="/assets/banner.png" /></a> -->
+		<!--<div class="container px-4 px-lg-5 my-5">
+			<div class="text-center text-white">
+				<h1 class="display-4 fw-bolder">Banner</h1>
+				<p class="lead fw-normal text-white-50 mb-0">This is the banner location.</p>
+			</div>
+		</div>-->
+	<!-- </header> -->
+	<!-- //Banner -->
+	<!-- Section-->
+	<!-- <section class="py-5">
+		<div class="container text-center px-4 px-lg-4 mt-3">
+			<span class="login">LOG IN</span>
+			
+			<div class="login_sns mt-5"
+				<div class="sns_login my-2 text-black2 fs-7 notosans-medium"> -->
+					<form name = frm method="POST"  >
+						<fieldset>
+						
+						<p>
+							<div class = "int-area">
+							<label for="email">이메일 </label>
+							<input type="email" id="user_email" name = "user_email" autocomplete="off" required></p>
+							</div>
+						<p>
+							<div class = "int-area">
+							<label for="mobile">전화번호 </label>
+							<input type="text" id="user_mobile" name = "user_mobile" autocomplete="off" required></p>
+							</div>
+						<p>
+							<div class = "btn-area">
+							<button id = "btn" type="submit" onclick="return Clickcheck()">로그인</button>
+							</div>
+						</p>
+						</fieldset>
+					</form>
+				
+					<script type="text/javascript">
+				
+						function Clickcheck(){
+							
+							var form = document.frm;
+							// var uemail = document.getElementById('user_email').value;
+							// var umobile = document.getElementById('user_mobile').value;
+							
+							var pattern1 = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+							var pattern2 = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+							
+							if(pattern1.test(form.user_email.value) != true){
+								alert("올바른 이메일을 입력해주세요.");
+								alert("입력값 : " + form.user_email.value);
+								uemail.value='';
+								uemail.focus();
+								return false;
+							}
+							
+							if(patter2.test(form.user_mobile.value) != true){
+								alert("휴대폰 번호를 확인해주세요.");
+								alert("입력값 : " + form.user_mobile.value);
+								umobile.value='';
+								umobile.focus(); 
+								return false;
+							}
+							
+							if(patter2.test(form.user_mobile.value) == true && pattern1.test(form.user_email.value) == true)
+							{
+								form.action = "/static/main/templates/main/rullet.html";
+								form.submit();
+							}
+							
+						}
 
+					</script>
+					
+					
+					
 
-                            <br />
+                    <!-- <a href="/oauth2/authorization/kakao" class="kakao mt-1">카카오로 로그인</a> -->
+                    <!--<a href="/oauth2/authorization/google" class="google mt-1">구글로 로그인</a>-->
+                <!-- </div>
+			</div>
+			<div class="my-5">
+				<p class="text-center text-gray fs-7 notosans-medium">문의 사항이 있으시다면<br /><text class="text-orange ms-1"><U>02. 711. 5809</U></text></p>
+				<br />
+				<hr />
+				<p class="text-center text-gray mt-5 fs-8 notosans-light"><text class="text-orange"><B>업무시간 안내</B></text><br />10:00 AM - 06:00 PM<br />*점심시간 12시-1시*<br />토,일(공휴일)은 휴무일입니다.</p>
+			</div> -->
+			
+		<!-- </div>
+	</section> -->
+	<!-- //Section -->
+	<!-- Footer -->
+	<!-- <footer class="py-5 bg-dark">
+		<div class="container">
+			<div class="text-center"><img src="/assets/footer_logo_icon.svg" /></div>
+			<div class="text-center"><img src="/assets/footer_logo_name.svg" /></div>
+			<div class="text-center mt-4 fs-5">
+				<a target="_blank" href="https://blog.naver.com/morphingi"><i class="text-light mx-2 fa fa-globe"></i></a>
+				<a target="_blank" href="https://www.youtube.com/channel/UCwUOXhvIo56jYnDlJCiMMpA"><i class="text-light mx-2 fa fa-youtube-play"></i></a>
+				<a target="_blank" href="https://twitter.com/morphing_i"><i class="text-light mx-2 fa fa-twitter"></i></a>
+				<a target="_blank" href="https://www.instagram.com/space_eve__/"><i class="text-light mx-2 fa fa-instagram"></i></a>
+			</div>
+			<div class="mt-4">
+				<p class="text-center text-light fs-9 notosans-bold">Please contact us if you have any specific request.</p>
+			</div>
+			<div class="footer-link text-center text-light fs-10 notosans-light">
+				<a class="mx-2" href="#" target="_blank">Info</a>
+				<a class="mx-2" href="#" target="_blank">Support</a>
+				<a class="mx-2" href="#" target="_blank">Terms of Use</a>
+				<a class="mx-2" href="#" target="_blank">Privacy Policy</a>
+			</div>
+			<div class="text-center mt-4"><span class="copyright fs-7 bebaskai">&copy; 2022 EVE Inventory</span></div>
+		</div>
+	</footer> -->
+	<!-- //Footer -->
+	<!-- Bootstrap core JS-->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> -->
+	<!-- Core theme JS-->
+	<!-- <script src="js/scripts.js"></script> -->
+</body>
 
-                            
-                        </div>
-                    </td>
-                    <tr>
-                    <td class="the_wheel" align="center" valign="middle">
-                        <canvas id="canvas" width="438" height="434" >
-                            <p style="color: white" align="center">Sorry, your browser doesn't support canvas. Please try another.</p>
-                        </canvas>
-                        
-                    </td>
-                    </tr>
-                </tr>
-            </table>
-                <td>
-                    
-                </td>
-            <table border="1">
-                <tr>
-                    <br>
-                    <br>
-                    <br>
-          
-                    <td>
-                        
-                        <img id="spin_button" src="/static/images/spin_on.png" alt="Spin" onClick="startSpin();" />
-                          
-                            
-
-      
-                    </td>
-                </tr>
-
-            </table>
-        </div>
-        <script>
-            let uri = "my test.asp?name=ståle&car=saab";
-            let encoded = encodeURI(uri);
-            let decoded = decodeURI(encoded);
-
-            let theWheel = new Winwheel({
-                'numSegments'  : 3,     
-                'outerRadius'  : 212,   
-                'textFontSize' : 20,    
-                'segments'     :        
-                [
-                   {'fillStyle' : '#00D8FF', 'text' : 'AA NFT #001', 'num':1, 'count': 1},
-                   {'fillStyle' : '#F2CB61', 'text' : 'AA NFT #002', 'num':2, 'count': 1},
-                   {'fillStyle' : '#FAECC5', 'text' : '에어드랍', 'num':3, 'count': 9999999},
-
-                ],
-                'animation' :          
-                {
-                    'type'     : 'spinToStop',
-                    'duration' : 5,     
-                    'spins'    : 8,     
-                    'callbackFinished' : alertPrize
-                }
-            });
-          
-            let wheelSpinning = false;
-            function startSpin()
-            {
-                if (wheelSpinning == false) {
-
-                    theWheel.animation.spins = 13;
-
-                    document.getElementById('spin_button').src       = "/static/images/spin_off.png";
-                    document.getElementById('spin_button').className = "";
-                    
-                    let stopAt = 0
-                    let max = Math.random()*100;
-                    if (max < 2)
-                    {
-                        stopAt = Math.floor((Math.random() * 119))
-                    }
-                    else if (max >=2 && max <5)
-                    {
-                        stopAt = (121 + Math.floor((Math.random() * 118)))
-                    }
-                    else if (max >= 5 && max <= 100)
-                    {
-                        stopAt = 241 + Math.floor((Math.random() * 118))
-                    }
-                      
-                    theWheel.animation.stopAngle = stopAt;
-
-                    theWheel.startAnimation();
-
-                    wheelSpinning = true;
-                }
-            }
-            
-            function resetWheel()
-            {
-                theWheel.stopAnimation(false);  
-                theWheel.rotationAngle = 0;     
-                theWheel.draw();                
-
-                document.getElementById('spin_button').src = "/static/images/spin_on.png";
-                document.getElementById('spin_button').className = "clickable";
-
-                wheelSpinning = false;  
-                      
-            }
-
-            function alertPrize(indicatedSegment)
-            {
-
-                    if (indicatedSegment.num == 4 || indicatedSegment.num == 8){
-                        alert("안타깝습니다 " + indicatedSegment.text + "입니다.");                        
-                    }
-                    else{
-                        alert("축하드립니다! " + indicatedSegment.text + "에 당첨되셨습니다.");
-                        indicatedSegment.count -=1;
-                        alert("남은 수량 : " + indicatedSegment.count);
-                    }
-            }
-        </script>
-
-    </body>
 </html>
